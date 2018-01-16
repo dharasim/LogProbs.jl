@@ -28,15 +28,6 @@ julia> exp(p*q)
 julia> p * q ≈ LogProb(.1)
 true
 
-julia> exp(p-q)
-ERROR: DomainError:
-log will only return a complex result if called with a complex argument. Try log(complex(x)).
-Stacktrace:
- [1] nan_dom_err at ./math.jl:300 [inlined]
- [2] log at ./math.jl:419 [inlined]
- [3] log1mexp(::Float64) at /Users/daniel/.julia/v0.6/StatsFuns/src/basicfuns.jl:35
- [4] -(::LogProbs.LogProb, ::LogProbs.LogProb) at /Users/daniel/.julia/v0.6/LogProbs/src/LogProbs.jl:20
-
 julia> exp(q-p)
 0.30000000000000004
 
