@@ -1,8 +1,13 @@
 module LogProbs
 
-using StatsFuns: logsumexp, log1mexp
-import Base: show, exp, zero, one, rand, +, -, *, /, <, promote_rule, convert
-export LogProb
+import Base:
+    show, promote_rule, convert,
+    zero, one, +, -, *, /, <,
+    exp, rand, norm, isapprox
+using StatsFuns:
+    logsumexp, log1mexp
+
+export LogProb, information
 
 struct LogProb <: Number
     value :: Float64
@@ -21,11 +26,12 @@ information(p::LogProb) = - p.value / log(2)
 
 <(x::LogProb, y::LogProb) = x.value < y.value
 
+promote_rule(::Type{LogProb}, ::Type{Int}) = LogProb
 promote_rule(::Type{LogProb}, ::Type{Float64}) = LogProb
-convert(::Type{LogProb}, x::Float64) = LogProb(x)
+convert(::Type{LogProb}, x::Real) = LogProb(x)
 
-dist(x::LogProb, y::LogProb) = abs(x.value-y.value)
-isapprox(x::LogProb, y::LogProb) = isapprox(x.value, y.value)
+norm(x::LogProb) = exp(x)
+isapprox(x::LogProb, y::LogProb) = isapprox(exp(x), exp(y))
 
 one(::Type{LogProb}) = LogProb(1.0)
 zero(::Type{LogProb}) = LogProb(nextfloat(typemin(Float64)))
