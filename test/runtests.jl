@@ -11,3 +11,5 @@ r = LogProb(.1)
 @test r * 2 ≈ p
 @test q - p ≈ LogProb(.3)
 @test p / q ≈ LogProb(.4)
+@test p + zero(LogProb) ≈ p
+@test p *  one(LogProb) ≈ p
