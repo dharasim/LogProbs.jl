@@ -1,4 +1,4 @@
-module LogProbs
+module LogProbs_
 
 import Base:
     show, promote_rule, convert,
@@ -19,11 +19,14 @@ exp(x::LogProb) = exp(x.value)
 information(p::LogProb) = - p.value / log(2)
 
 *(x::LogProb, y::LogProb) = LogProb(x.value + y.value)
-/(x::LogProb, y::LogProb) = if x.value > y.value
+/(x::LogProb, y::LogProb) = if x.value < y.value
     LogProb(x.value - y.value)
 else
-    @assert x.value ≈ y.value
-    zero(LogProb)
+    @assert(
+        x.value ≈ y.value,
+        "subtraction impossible, would yield negative probability"
+    )
+    LogProb(0.0)
 end
 
 +(x::LogProb, y::LogProb) = LogProb(logsumexp(x.value, y.value))
