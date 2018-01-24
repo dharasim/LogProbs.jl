@@ -1,4 +1,4 @@
-module LogProbs_
+module LogProbs
 
 import Base:
     show, promote_rule, convert,
