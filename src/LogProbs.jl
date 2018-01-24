@@ -19,14 +19,14 @@ exp(x::LogProb) = exp(x.value)
 information(p::LogProb) = - p.value / log(2)
 
 *(x::LogProb, y::LogProb) = LogProb(x.value + y.value)
-/(x::LogProb, y::LogProb) = if x.value > y.value
+/(x::LogProb, y::LogProb) = if x.value < y.value
     LogProb(x.value - y.value)
 else
     @assert(
         x.value ≈ y.value,
         str(
-            "LogProb subtraction impossible, would yield negative probability ",
-            x, " ", y
+            "LogProb subtraction impossible, would yield probability greater than one ",
+            x, " - ", y
         )
     )
     LogProb(0.0)
