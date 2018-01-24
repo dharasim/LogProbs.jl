@@ -19,7 +19,12 @@ exp(x::LogProb) = exp(x.value)
 information(p::LogProb) = - p.value / log(2)
 
 *(x::LogProb, y::LogProb) = LogProb(x.value + y.value)
-/(x::LogProb, y::LogProb) = LogProb(x.value - y.value)
+/(x::LogProb, y::LogProb) = if x.value > y.value
+    LogProb(x.value - y.value)
+else
+    @assert x.value ≈ y.value
+    zero(LogProb)
+end
 
 +(x::LogProb, y::LogProb) = LogProb(logsumexp(x.value, y.value))
 -(x::LogProb, y::LogProb) = LogProb(x.value + log1mexp(y.value-x.value))
