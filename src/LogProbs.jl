@@ -25,7 +25,7 @@ else
     @assert(
         x.value ≈ y.value,
         str(
-            "LogProb subtraction impossible, would yield negative probability "
+            "LogProb subtraction impossible, would yield negative probability ",
             x, " ", y
         )
     )
