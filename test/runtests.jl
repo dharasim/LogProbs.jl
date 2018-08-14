@@ -1,5 +1,5 @@
 using LogProbs
-using Base.Test
+using Test
 
 p = LogProb(.2)
 q = LogProb(.5)

@@ -10,32 +10,38 @@ This package provides the Type `LogProb` for calculations with [logspace probabi
 ```julia
 julia> using LogProbs
 
-julia> p = LogProb(.2)
-LogProb(-1.6094379124341003)
+julia> p = LogProb(0.2)
+LogProb(0.2)
 
-julia> q = LogProb(.5)
-LogProb(-0.6931471805599453)
+julia> q = LogProb(0.5)
+LogProb(0.5)
 
 julia> p + q
-LogProb(-0.35667494393873234)
+LogProb(0.7)
 
-julia> exp(p+q)
+julia> exp(p + q)
 0.7
 
-julia> exp(p*q)
+julia> exp(p * q)
 0.10000000000000002
 
-julia> p * q ≈ LogProb(.1)
+julia> q - p
+LogProb(0.30000000000000004)
+
+julia> q - p == LogProb(0.3)
+false
+
+julia> q - p ≈ LogProb(0.3)
 true
 
-julia> exp(q-p)
-0.30000000000000004
+julia> q / p
+LogProb(2.5)
 
-julia> exp(p/q)
-0.4
+julia> p / q
+LogProb(0.4)
 
 julia> rand(LogProb)
-LogProb(-0.09991078882457756)
+LogProb(0.8973798055014042)
 
 julia> p < q, q < p
 (true, false)
