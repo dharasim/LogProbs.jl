@@ -1,6 +1,0 @@
-name = "LogProbs"
-uuid = "0810563c-c8a8-53be-b185-e51c33dc41ea"
-repo = "https://github.com/dharasim/LogProbs.jl.git"
-
-[deps]
-StatsFuns = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
