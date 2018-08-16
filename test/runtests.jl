@@ -13,3 +13,5 @@ r = LogProb(.1)
 @test p / q ≈ LogProb(.4)
 @test p + zero(LogProb) ≈ p
 @test p *  one(LogProb) ≈ p
+@test p < q
+@test LogProb(0) < p

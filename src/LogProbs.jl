@@ -2,7 +2,7 @@ module LogProbs
 
 import Base: show, promote_rule, convert, exp, rand, isapprox
 import Base: ==, hash
-import Base: zero, one, +, -, *, /, <
+import Base: zero, one, +, -, *, /, isless
 
 using StatsFuns: logaddexp, log1mexp
 
@@ -29,7 +29,7 @@ zero(::Type{LogProb})     = LogProb(0)
 +(x::LogProb, y::LogProb) = LogProb(logaddexp(x.value, y.value), islog=true)
 -(x::LogProb, y::LogProb) = LogProb(x.value + log1mexp(y.value-x.value), islog=true)
 
-<(x::LogProb, y::LogProb) = x.value < y.value
+isless(x::LogProb, y::LogProb) = isless(x.value, y.value)
 
 promote_rule(::Type{LogProb}, ::Type{Int})     = LogProb
 promote_rule(::Type{LogProb}, ::Type{Float64}) = LogProb
