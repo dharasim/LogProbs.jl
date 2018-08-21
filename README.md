@@ -19,10 +19,13 @@ LogProb(0.5)
 julia> p + q
 LogProb(0.7)
 
-julia> exp(p + q)
+julia> float(p + q)
 0.7
 
-julia> exp(p * q)
+julia> log(p + q)
+-0.35667494393873234
+
+julia> float(p * q)
 0.10000000000000002
 
 julia> q - p
