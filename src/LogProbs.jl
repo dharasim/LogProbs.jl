@@ -10,6 +10,14 @@ using StatsFuns: logaddexp, log1mexp
 
 export LogProb, information
 
+"""
+    LogProb(x)
+
+Create a container of a positive real number `x`
+for convenient calculations with logspace probabilities
+
+see https://en.wikipedia.org/wiki/Log_probability
+"""
 struct LogProb <: Number
     log :: Float64
     LogProb(number; islog::Bool=false) = islog ? new(number) : new(log(number))
@@ -24,6 +32,12 @@ rand(::Type{LogProb})     = LogProb(rand())
 
 float(x::LogProb)         = exp(x.log)
 log(x::LogProb)           = x.log
+
+"""
+    information(p::LogProb)
+
+Calculate the Shannon information content of `p` in bits
+"""
 information(x::LogProb)   = - log(x) / log(2)
 
 one( ::Type{LogProb})     = LogProb(1)
@@ -38,3 +52,5 @@ isless(  x::LogProb, y::LogProb) = isless(  x.log, y.log)
 isapprox(x::LogProb, y::LogProb) = isapprox(x.log, y.log)
 
 end # Module
+
+LogProb
