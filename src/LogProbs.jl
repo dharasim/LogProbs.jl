@@ -52,5 +52,3 @@ isless(  x::LogProb, y::LogProb) = isless(  x.log, y.log)
 isapprox(x::LogProb, y::LogProb) = isapprox(x.log, y.log)
 
 end # Module
-
-LogProb
